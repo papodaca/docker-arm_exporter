@@ -1,5 +1,5 @@
 # Builder container
-FROM --platform=$BUILDPLATFORM golang:1.14 AS builder
+FROM --platform=arm64 golang:1.14 AS builder
 # Install a go wrapper script converting Docker's $TARGETPLATFORM to $GOARCH
 # and $GOARM environment variables for cross-compiling.
 COPY --from=tonistiigi/xx:golang / /
@@ -7,7 +7,7 @@ ARG TARGETPLATFORM
 
 WORKDIR $GOPATH
 
-ENV PROJECT github.com/lukasmalkmus/rpi_exporter
+ENV PROJECT github.com/papodaca/rpi_exporter
 ENV CGO_ENABLED=0
 
 RUN go get $PROJECT && \
